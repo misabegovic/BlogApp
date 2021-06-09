@@ -7,4 +7,6 @@ class Comment < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :smiles, dependent: :destroy
   has_many :thumbs_ups, dependent: :destroy
+
+  validates_presence_of :description
 end
