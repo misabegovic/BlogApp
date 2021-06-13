@@ -1,0 +1,38 @@
+<ul class="nav nav-tabs">
+  <li class="nav-item">    
+    <%= link_to 'Post', post_path(@post), class: "nav-link" %>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="#">Comments</a>
+  </li>
+  <% if @post.user.id == current_user.id %>
+    <li class="nav-item">    
+    <%= link_to 'Edit', edit_current_user_post_path(@post), :class => 'nav-link' %>
+    </li>
+    <li class="nav-item">    
+      <%= link_to 'Delete', current_user_post_path(@post), method: :delete, data: {confirm: "Are you sure?"}, :class => 'nav-link'  %>
+    </li>
+  <% end %>
+  <li class="nav-item">    
+    <%= link_to 'Back', user_posts_path(@post.user), class: "nav-link" %>
+  </li>
+</ul>
+<div class="container-fluid">
+  <div class="row mt-4">
+      <div class="col-12">
+          <div class="card text-center">
+              <div class="card-header">
+              <%= @post.title %> > Comments
+              </div>
+              <%= render 'create_form', post: @post %>
+              <% @comments.each do |comment| %>
+                <% if comment.user.id == current_user.id%>
+                  <%= render 'edit_form', comment: comment, post: @post %>
+                <% else %>
+                  <%= render 'comment', comment: comment %>
+                <% end %>
+              <% end %>
+          </div>
+      </div>
+  </div>
+</div>

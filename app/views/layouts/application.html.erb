@@ -13,34 +13,27 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="/">BlogApp</a>
-
-      <div class="collapse navbar-collapse">
-        <ul class="navbar-nav mr-auto">
-          <% if user_signed_in? %>
-            <li class="nav-item">
+    <% if user_signed_in? %>
+      <div class="container-fluid">
+        <div class="row mt-4">
+          <div class="col-2">
+            <nav class="nav flex-column">
               <p class="nav-link">Welcome <strong><%= current_user.email %></strong></p>
-            </li>
-            <li class="nav-item">
               <%= link_to 'Home', root_path, :class => 'nav-link' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to 'New Post', edit_user_registration_path, :class => 'nav-link' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to 'My Posts', edit_user_registration_path, :class => 'nav-link' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to 'Edit profile', edit_user_registration_path, :class => 'nav-link' %>
-            </li>
-            <li class="nav-item">
+              <%= link_to 'New Post', new_current_user_post_path(current_user), :class => 'nav-link' %>
+              <%= link_to 'My Posts', user_posts_path(current_user), :class => 'nav-link' %>
               <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'nav-link'  %>
-            </li>
-          <% end %>
-        </ul>
+            </nav>
+          </div>
+          <div class="col-8">
+            <%= yield %>
+          </div>
+          <div class="col-2">
+          </div>
+        </div>
       </div>
-    </nav>
-    <%= yield %>
+    <% else %>
+      <%= yield %>
+    <% end %>
   </body>
 </html>

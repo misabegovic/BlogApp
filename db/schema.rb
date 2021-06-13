@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_09_192837) do
+ActiveRecord::Schema.define(version: 2021_06_13_213055) do
 
   create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "post_id"
@@ -22,15 +22,6 @@ ActiveRecord::Schema.define(version: 2021_06_09_192837) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "likes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "comment_id"
-    t.bigint "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["comment_id"], name: "index_likes_on_comment_id"
-    t.index ["user_id"], name: "index_likes_on_user_id"
-  end
-
   create_table "posts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id"
     t.string "title", null: false
@@ -40,22 +31,14 @@ ActiveRecord::Schema.define(version: 2021_06_09_192837) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
-  create_table "smiles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "reactions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "comment_id"
     t.bigint "user_id"
+    t.integer "reaction_type", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["comment_id"], name: "index_smiles_on_comment_id"
-    t.index ["user_id"], name: "index_smiles_on_user_id"
-  end
-
-  create_table "thumbs_ups", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "comment_id"
-    t.bigint "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["comment_id"], name: "index_thumbs_ups_on_comment_id"
-    t.index ["user_id"], name: "index_thumbs_ups_on_user_id"
+    t.index ["comment_id"], name: "index_reactions_on_comment_id"
+    t.index ["user_id"], name: "index_reactions_on_user_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -72,11 +55,7 @@ ActiveRecord::Schema.define(version: 2021_06_09_192837) do
 
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
-  add_foreign_key "likes", "comments"
-  add_foreign_key "likes", "users"
   add_foreign_key "posts", "users"
-  add_foreign_key "smiles", "comments"
-  add_foreign_key "smiles", "users"
-  add_foreign_key "thumbs_ups", "comments"
-  add_foreign_key "thumbs_ups", "users"
+  add_foreign_key "reactions", "comments"
+  add_foreign_key "reactions", "users"
 end

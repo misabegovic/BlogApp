@@ -1,0 +1,25 @@
+<%= form_with(model: post, url: current_user_posts_path, local: true, :html => {:class => 'form-signin'}) do |form| %>    
+    <% if post.errors.any? %>
+        <div id="error_explanation">
+        <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+        <ul>
+            <% post.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+        </ul>
+        </div>
+    <% end %>
+
+    <%= form.label :title %>
+    <div class="form-label-group">
+        <%= form.text_field :title, placeholder: "Post title", class: "form-control" %>
+    </div>
+
+    <%= form.label :description %>
+    <div class="form-label-group">
+        <%= form.text_area :description, placeholder: "Post description", class: "form-control" %>
+    </div>
+
+    <%= form.submit "Save", class: "btn btn-lg btn-primary btn-block text-uppercase" %>
+<% end %>
