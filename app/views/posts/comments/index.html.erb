@@ -1,38 +1,58 @@
-<ul class="nav nav-tabs">
-  <li class="nav-item">    
-    <%= link_to 'Post', post_path(@post), class: "nav-link" %>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link active" href="#">Comments</a>
-  </li>
-  <% if @post.user.id == current_user.id %>
-    <li class="nav-item">    
-    <%= link_to 'Edit', edit_current_user_post_path(@post), :class => 'nav-link' %>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <%= link_to 'Home', root_path %>
     </li>
-    <li class="nav-item">    
-      <%= link_to 'Delete', current_user_post_path(@post), method: :delete, data: {confirm: "Are you sure?"}, :class => 'nav-link'  %>
+    <li class="breadcrumb-item">
+      <%= link_to @post.user.email, user_posts_path(@post.user) %>
     </li>
-  <% end %>
-  <li class="nav-item">    
-    <%= link_to 'Back', user_posts_path(@post.user), class: "nav-link" %>
-  </li>
-</ul>
+    <li class="breadcrumb-item">
+      <%= link_to "Posts", user_posts_path(@post.user) %>
+    </li>
+    <li class="breadcrumb-item">
+      <%= link_to @post.title, post_path(@post) %>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+      Comments
+    </li>
+  </ol>
+</nav>
 <div class="container-fluid">
   <div class="row mt-4">
       <div class="col-12">
           <div class="card text-center">
               <div class="card-header">
-              <%= @post.title %> > Comments
+                Add a new comment
               </div>
-              <%= render 'create_form', post: @post %>
-              <% @comments.each do |comment| %>
-                <% if comment.user.id == current_user.id%>
-                  <%= render 'edit_form', comment: comment, post: @post %>
-                <% else %>
-                  <%= render 'comment', comment: comment %>
-                <% end %>
-              <% end %>
+              <%= render 'create_form', post: @post %>              
           </div>
+      </div>      
+  </div>
+  <div class="row mt-4">
+      <div class="col-12">
+          <% if @comments.count.positive? %>
+            <div class="row">
+              <table class="table table-sm center-text table-bordered">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Author</th>
+                    <th scope="col">Comment</th>
+                    <th scope="col">Actions</th>
+                    <th scope="col">Reactions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% @comments.each do |comment| %>
+                      <%= render 'comment_row', comment: comment, user: current_user %>
+                    <% end %>                
+                </tbody>
+              </table>
+            </div>
+          <% else %>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              There are no comments to display.
+            </div>
+          <% end %>
       </div>
   </div>
 </div>

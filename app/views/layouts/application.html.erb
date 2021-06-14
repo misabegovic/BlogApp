@@ -18,11 +18,27 @@
         <div class="row mt-4">
           <div class="col-2">
             <nav class="nav flex-column">
-              <p class="nav-link">Welcome <strong><%= current_user.email %></strong></p>
-              <%= link_to 'Home', root_path, :class => 'nav-link' %>
-              <%= link_to 'New Post', new_current_user_post_path(current_user), :class => 'nav-link' %>
-              <%= link_to 'My Posts', user_posts_path(current_user), :class => 'nav-link' %>
-              <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'nav-link'  %>
+              <div class="card">
+                <div class="card-body">
+                  Welcome <strong><%= current_user.email %></strong>
+                </div>
+              </div>
+              <div class="card" style="width: 18rem;">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                    <%= link_to 'Home', root_path %>
+                  </li>
+                  <li class="list-group-item">
+                    <%= link_to 'New Post', new_current_user_post_path(current_user) %>
+                  </li>
+                  <li class="list-group-item">
+                    <%= link_to 'My Posts', user_posts_path(current_user) %>
+                  </li>
+                  <li class="list-group-item">
+                    <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+                  </li>
+                </ul>
+              </div>
             </nav>
           </div>
           <div class="col-8">

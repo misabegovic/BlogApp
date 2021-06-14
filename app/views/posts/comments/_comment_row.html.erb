@@ -1,0 +1,46 @@
+<tr>
+    <td>
+        <%= comment.user.email %>
+    </td>
+    <% if comment.user.id == user.id %>  
+        <%= form_with(model: [ comment.post, comment ], url: post_comment_path(comment.post, comment), method: :patch, local: true) do |form| %>
+            <td style="width:50%">
+                <%= form.text_area :description, class: 'form-control', placeholder: "Comment description" %>
+            </td>
+            <td>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                     <%= form.submit "Update", class: "btn btn-outline-primary btn-block" %>
+                    </li>
+                    <li class="list-group-item">
+                     <%= link_to 'Delete', post_comment_path(comment.post, comment), method: :delete, data: {confirm: "Are you sure?"}, :class => 'btn btn-outline-primary btn-block'  %>
+                    </li>
+                </ul>
+            </td>
+        <% end %>
+    <% else %>
+        <td style="width:50%">
+          <%= comment.description %>
+        </td>
+        <td>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <%= link_to 'View Posts', user_posts_path(comment.user), :class => 'btn btn-outline-primary btn-block' %>
+                </li>
+            </ul>
+        </td>
+    <% end %>
+    <td>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <%= render 'reaction_form', comment: comment, type: like_type %>
+            </li>
+            <li class="list-group-item">
+              <%= render 'reaction_form', comment: comment, type: thumbs_up_type %>
+            </li>
+            <li class="list-group-item">
+              <%= render 'reaction_form', comment: comment, type: smile_type %>
+            </li>
+        </ul>
+    </td>
+</tr>    

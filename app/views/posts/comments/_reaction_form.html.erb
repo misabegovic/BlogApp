@@ -1,14 +1,15 @@
 <% if user_reacted?(comment, type) %>
     <%= form_with(model: [ comment, user_reaction(comment, type) ], url: comment_reaction_path(comment, user_reaction(comment, type)), method: :delete, local: true) do |form| %>    
-        <%= reactions_count comment, type %> 
-
-        <%= form.submit humanize_type(type), class: "btn btn-primary" %>
+        <button type="submit" class="btn btn-primary">
+          <%= humanize_type(type) %> <span class="badge badge-light"><%= reactions_count comment, type %></span>
+        </button>
     <% end %>
 <% else %>
     <%= form_with(model: [ comment, Reaction.new ], url: comment_reactions_path(comment), method: :post, local: true) do |form| %>    
         <%= form.hidden_field :reaction_type, :value => type %>
-        <%= reactions_count comment, type %> 
 
-        <%= form.submit humanize_type(type), class: "btn btn-secondary" %>
+        <button type="submit" class="btn btn-secondary">
+          <%= humanize_type(type) %> <span class="badge badge-light"><%= reactions_count comment, type %></span>
+        </button>
     <% end %>
 <% end %>

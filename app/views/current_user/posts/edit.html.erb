@@ -1,17 +1,31 @@
-<ul class="nav nav-tabs">
-  <li class="nav-item">    
-    <%= link_to 'Back', post_path(@post), class: "nav-link" %>
-  </li>
-</ul>
-<div class="container">
-  <div class="row">
-    <div class="col-9 mx-auto">
-      <div class="card card-signin">
-        <div class="card-body">
-          <h5 class="card-title text-center">Update Post</h5>
-          <%= render 'edit_form', post: @post %>
-        </div>
-      </div>
-    </div>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <%= link_to 'Home', root_path %>
+    </li>
+    <li class="breadcrumb-item">
+      <%= link_to current_user.email, user_posts_path(current_user) %>
+    </li>
+    <li class="breadcrumb-item">
+      <%= link_to "Posts", user_posts_path(current_user) %>
+    </li>
+    <li class="breadcrumb-item">
+      <%= link_to @post.title, post_path(@post) %>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+      Edit
+    </li>
+  </ol>
+</nav>
+<div class="container-fluid">
+  <div class="row mt-4">
+      <div class="col-12">
+          <div class="card">
+              <div class="card-header">
+              Update Post
+              </div>
+              <%= render 'edit_form', post: @post %>              
+          </div>
+      </div>      
   </div>
 </div>

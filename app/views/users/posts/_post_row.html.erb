@@ -1,0 +1,14 @@
+<tr>
+    <td>
+        <%= post.title %>
+    </td>
+    <td>
+        <%= post.comments.count %>
+    </td>
+    <td>
+        <%= post.updated_at %>
+    </td>
+    <td>
+      <%= link_to 'Open', post_path(post), :class => 'btn btn-outline-primary btn-block' %>
+    </td>
+</tr>

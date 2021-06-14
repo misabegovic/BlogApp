@@ -1,12 +1,28 @@
-<div class="container">
-  <div class="row">
-    <div class="col-9 mx-auto">
-      <div class="card card-signin">
-        <div class="card-body">
-          <h5 class="card-title text-center">New Post</h5>
-          <%= render 'create_form', post: @post %>
-        </div>
-      </div>
-    </div>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <%= link_to 'Home', root_path %>
+    </li>
+    <li class="breadcrumb-item">
+      <%= link_to current_user.email, user_posts_path(current_user) %>
+    </li>
+    <li class="breadcrumb-item">
+      <%= link_to "Posts", user_posts_path(current_user) %>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+      New Post
+    </li>
+  </ol>
+</nav>
+<div class="container-fluid">
+  <div class="row mt-4">
+      <div class="col-12">
+          <div class="card">
+              <div class="card-header">
+                New Post
+              </div>
+              <%= render 'create_form', post: @post %>              
+          </div>
+      </div>      
   </div>
 </div>
