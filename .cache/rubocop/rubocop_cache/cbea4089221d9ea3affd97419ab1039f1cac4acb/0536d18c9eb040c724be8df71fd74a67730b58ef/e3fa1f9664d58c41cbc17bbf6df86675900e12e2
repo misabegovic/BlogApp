@@ -1,1 +1,0 @@
-[{"severity":"convention","location":{"begin_pos":207,"end_pos":212},"message":"Naming/MemoizedInstanceVariableName: Memoized variable `@user` does not match method name `set_user`. Use `@set_user` instead.","cop_name":"Naming/MemoizedInstanceVariableName","status":"unsupported"}]

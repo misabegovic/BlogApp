@@ -1,0 +1,7 @@
+<% if result.success? %>
+  document.getElementById('notice').innerHTML = "<%= j render 'shared/success', action: :create %>";
+	document.getElementById('new_comment').reset();
+  document.getElementById('post_comments').insertAdjacentHTML('afterbegin', "<%= j render 'comment_row', comment: result.value, user: current_user %>");
+<% else %>
+	document.getElementById('notice').innerHTML = "<%= j render 'shared/fail', errors: result.errors %>";
+<% end %>

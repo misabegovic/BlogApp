@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :posts, only: %i[index], controller: 'users/posts'
   end
   resources :posts, only: %i[show], controller: 'posts' do
-    resources :comments, only: %i[index create update destroy], controller: 'posts/comments'
+    resources :comments, only: %i[index create edit update destroy], controller: 'posts/comments'
   end
   resources :comments, only: %i[] do
     resources :reactions, only: %i[create update destroy], controller: 'comments/reactions'

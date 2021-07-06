@@ -18,41 +18,44 @@
   </ol>
 </nav>
 <div class="container-fluid">
+	<p id="notice"></p>
   <div class="row mt-4">
       <div class="col-12">
           <div class="card text-center">
               <div class="card-header">
                 Add a new comment
               </div>
-              <%= render 'create_form', post: @post %>              
+							<div id="comment_form">
+              	<%= render 'create_form', post: @post %>              
+							</div>
           </div>
       </div>      
   </div>
   <div class="row mt-4">
       <div class="col-12">
-          <% if @comments.count.positive? %>
-            <div class="row">
-              <table class="table table-sm center-text table-bordered">
-                <thead class="thead-light">
-                  <tr>
-                    <th scope="col">Author</th>
-                    <th scope="col">Comment</th>
-                    <th scope="col">Actions</th>
-                    <th scope="col">Reactions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    <% @comments.each do |comment| %>
-                      <%= render 'comment_row', comment: comment, user: current_user %>
-                    <% end %>                
-                </tbody>
-              </table>
-            </div>
-          <% else %>
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-              There are no comments to display.
-            </div>
-          <% end %>
+				<% if @comments.count.positive? %>
+					<div class="row">
+						<table class="table table-sm center-text table-bordered">
+							<thead class="thead-light">
+								<tr>
+									<th scope="col">Author</th>
+									<th scope="col">Comment</th>
+									<th scope="col">Actions</th>
+									<th scope="col">Reactions</th>
+								</tr>
+							</thead>
+							<tbody id="post_comments">
+								<% @comments.each do |comment| %>
+									<%= render 'comment_row', comment: comment, user: current_user %>
+								<% end %>               
+							</tbody>
+						</table>
+					</div>
+				<% else %>
+					<div class="alert alert-warning alert-dismissible fade show" role="alert">
+						There are no comments to display.
+					</div>
+				<% end %>
       </div>
   </div>
 </div>

@@ -3,38 +3,62 @@
 module Posts
   class CommentsController < ApplicationController
     def index
-      @comments = post.comments.sort_by_updated_at.includes(:reactions)
+      @comments = Posts::CommentsQuery.new(post.id, include_reactions: true).call
     end
 
     def create
-      @comment = Comment.new(comment_params)
-      @comment.user = current_user
-      @comment.post = post
-      @comment.save
+      result = Comments::CreateService.new(params[:post_id], current_user.id, comment_params).call
 
       respond_to do |format|
-        @comment.save
-        format.html { redirect_to post_comments_path(post) }
+        format.js do
+          render :create, locals: {
+            result: result,
+            current_user: current_user
+          }
+        end
+      end
+    end
+
+    def edit
+      comment = current_user.comments.find(params[:id])
+
+      respond_to do |format|
+        format.js do
+          render :edit, locals: {
+            comment: comment
+          }
+        end
       end
     end
 
     def update
+      result = Comments::UpdateService.new(params[:id], current_user.id, comment_params).call
+
       respond_to do |format|
-        comment.update(comment_params)
-        format.html { redirect_to post_comments_path(post) }
+        format.js do
+          render :update, locals: {
+            result: result,
+            current_user: current_user
+          }
+        end
       end
     end
 
     def destroy
-      comment.destroy
-      redirect_to post_comments_path(post)
+      result = Comments::DeleteService.new(params[:id], current_user.id).call
+
+      respond_to do |format|
+        format.js do
+          render :destroy, locals: {
+            result: result,
+            post: post,
+            comment_id: params[:id]
+          }
+        end
+      end
     end
 
     private
-
-    def comment
-      @comment ||= post.comments.find(params[:id])
-    end
 
     def post
       @post ||= Post.find(params[:post_id])

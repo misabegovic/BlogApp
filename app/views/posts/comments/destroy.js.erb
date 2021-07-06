@@ -1,0 +1,7 @@
+<% if result.success? %>
+  document.getElementById('notice').innerHTML = "<%= j render 'shared/success', action: :delete %>";
+	document.getElementById('comment_form').innerHTML= "<%= j render 'create_form', post: post %>";	
+  document.getElementById("comment_row_<%= comment_id %>").remove();
+<% else %>
+	document.getElementById('notice').innerHTML = "<%= j render 'shared/fail', errors: result.errors %>";
+<% end %>

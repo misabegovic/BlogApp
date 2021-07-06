@@ -2,6 +2,6 @@
 
 class HomeController < ApplicationController
   def index
-    @users = User.where.not(id: current_user.id)
+    @users = Home::UsersQuery.new(current_user.id).call
   end
 end

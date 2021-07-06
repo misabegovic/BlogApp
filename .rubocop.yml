@@ -105,3 +105,6 @@ RSpec/NestedGroups:
 
 RSpec/NamedSubject:
   Enabled: false
+
+Lint/MissingSuper:
+  Enabled: false
