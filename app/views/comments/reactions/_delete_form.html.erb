@@ -1,5 +1,5 @@
-<%= form_for([ comment, user_reaction(comment, type) ], method: :delete, remote: true) do |form| %>    
+<%= form_for([ comment, reaction ], method: :delete, remote: true) do |form| %>    
 	<button type="submit" class="btn btn-primary">
-		<%= humanize_type(type) %> <span class="badge badge-light"><%= reactions_count comment, type %></span>
+		<%= humanize_type(reaction.reaction_type) %> <span class="badge badge-light"><%= reactions_count comment, reaction.reaction_type %></span>
 	</button>
 <% end %>

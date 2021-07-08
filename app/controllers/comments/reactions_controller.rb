@@ -23,7 +23,7 @@ module Comments
           render :destroy, locals: {
             result: result,
             comment: comment,
-            reaction_id: params[:id]
+            current_user: current_user
           }
         end
       end

@@ -10,14 +10,11 @@ module Reactions
     def call
       execute(rescue_list: [ActiveRecord::RecordInvalid]) do
         reaction = find_reaction
-        reaction_type = reaction.reaction_type
         validate_owner!(reaction)
+        result = prepare_result(reaction)
         delete_reaction!(reaction)
 
-        add_result({
-                     deleted: true,
-                     reaction_type: reaction_type
-                   })
+        add_result(result)
       end
     end
 
@@ -25,6 +22,13 @@ module Reactions
 
     def find_reaction
       Reaction.find(@reaction_id)
+    end
+
+    def prepare_result(reaction)
+      {
+        deleted: true,
+        reaction_type: reaction.reaction_type
+      }
     end
 
     def validate_owner!(reaction)
