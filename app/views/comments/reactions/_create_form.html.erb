@@ -2,6 +2,9 @@
 	<%= form.hidden_field :reaction_type, :value => type, id: "comment_reaction_"+type+"_"+comment.id.to_s %>
 
 	<button type="submit" class="btn btn-secondary">
-		<%= humanize_type(type) %> <span class="badge badge-light"><%= reactions_count comment, type %></span>
+		<%= humanize_type(type) %>
+		<span class="badge badge-light" id="comment_<%= comment.id %>_<%= type.to_s %>_count">
+			<%= reactions_count comment, type %>
+		</span>
 	</button>
 <% end %>

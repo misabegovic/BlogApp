@@ -1,8 +1,3 @@
-<% if result.success? %>
-  var element = document.getElementById("<%= result.value[:reaction_type] %>_comment_<%= comment.id %>");
-	if (element) {
-		element.innerHTML = "<%= j render 'comments/reactions/reaction_list_item', comment: comment, user: current_user, type: result.value[:reaction_type] %>";
-	}
-<% else %>
+<% if result.failure? %>
 	document.getElementById('notice').innerHTML = "<%= j render 'shared/fail', errors: result.errors %>";
 <% end %>

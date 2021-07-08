@@ -1,3 +1,6 @@
+<div id="post-id" data-post-id="<%= @post.try(:id) %>"></div>
+<div id="user-id" data-user-id="<%= current_user.try(:id) %>"></div>
+
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item">
@@ -9,7 +12,7 @@
     <li class="breadcrumb-item">
       <%= link_to "Posts", user_posts_path(@post.user) %>
     </li>
-    <li class="breadcrumb-item active" aria-current="page">
+    <li class="breadcrumb-item active" aria-current="page" id="post-title-breadcrumb">
       <%= @post.title %>
     </li>
   </ol>
@@ -17,7 +20,7 @@
 <div class="row mt-4">
 		<div class="col-12">
 				<div class="card text-center">
-					<div class="card-header">
+					<div class="card-header" id="post-header">
 						<ul class="nav nav-pills card-header-pills">
 							<li class="nav-item">
 								<%= link_to 'Comments', post_comments_path(@post), class: "nav-link" %>
@@ -33,10 +36,10 @@
 						</ul>
 					</div>
 					<div class="card-body">
-						<h5 class="card-title">
+						<h5 class="card-title" id="post-title">
 							<%= @post.title %>
 						</h5>
-						<p class="card-text">
+						<p class="card-text" id="post-description">
 							<%= @post.description %>
 						</p>
 					</div>
