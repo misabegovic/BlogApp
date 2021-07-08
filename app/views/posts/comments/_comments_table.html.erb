@@ -1,17 +1,15 @@
-<div class="row">
-	<table class="table table-sm center-text table-bordered">
-		<thead class="thead-light">
-			<tr>
-				<th scope="col">Author</th>
-				<th scope="col">Comment</th>
-				<th scope="col">Actions</th>
-				<th scope="col">Reactions</th>
-			</tr>
-		</thead>
-		<tbody id="post_comments">
-			<% comments.each do |comment| %>
-				<%= render 'comment_row', comment: comment, user: user %>
-			<% end %>               
-		</tbody>
-	</table>
-</div>
+<table class="table table-sm center-text table-bordered">
+	<thead class="thead-light">
+		<tr>
+			<th scope="col">Author</th>
+			<th scope="col">Comment</th>
+			<th scope="col">Actions</th>
+			<th scope="col">Reactions</th>
+		</tr>
+	</thead>
+	<tbody id="post_comments">
+		<% comments.each do |comment| %>
+			<%= render 'comment_row', comment: comment, user: user %>
+		<% end %>               
+	</tbody>
+</table>

@@ -1,29 +1,24 @@
+<% if post.errors.any? %>
+	<%= render 'shared/fail', errors: post.errors %>
+<% end %>
 <div class="card text-center">
+		<div class="card-header">
+			New Post
+		</div>
     <div class="card-body">
-        <%= form_with(model: post, url: current_user_posts_path, local: true) do |form| %>
-            <% if post.errors.any? %>
-                <div id="error_explanation">
-                <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+			<%= form_with(model: post, url: current_user_posts_path, local: true) do |form| %>
 
-                <ul>
-                    <% post.errors.full_messages.each do |message| %>
-                    <li><%= message %></li>
-                    <% end %>
-                </ul>
-                </div>
-            <% end %>
+				<%= form.label :title %>
+				<div class="form-label-group">
+						<%= form.text_field :title, placeholder: "Post title", class: "form-control" %>
+				</div>
 
-            <%= form.label :title %>
-            <div class="form-label-group">
-                <%= form.text_field :title, placeholder: "Post title", class: "form-control" %>
-            </div>
+				<%= form.label :description %>
+				<div class="form-label-group">
+						<%= form.text_area :description, placeholder: "Post description", class: "form-control" %>
+				</div>
 
-            <%= form.label :description %>
-            <div class="form-label-group">
-                <%= form.text_area :description, placeholder: "Post description", class: "form-control" %>
-            </div>
-
-            <%= form.submit "Save", class: "btn btn-outline-primary btn-block" %>
-        <% end %>
+				<%= form.submit "Save", class: "btn btn-outline-primary btn-block" %>
+			<% end %>
     </div>
 </div>

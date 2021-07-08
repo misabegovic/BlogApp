@@ -14,34 +14,32 @@
     </li>
   </ol>
 </nav>
-<div class="container-fluid">
-  <div class="row mt-4">
-      <div class="col-12">
-          <div class="card text-center">
-            <div class="card-header">
-              <ul class="nav nav-pills card-header-pills">
-                <li class="nav-item">
-                  <%= link_to 'Comments', post_comments_path(@post), class: "nav-link" %>
-                </li>
-                <% if @post.user.id == current_user.id %>  
-                  <li class="nav-item">
-                    <%= link_to 'Edit', edit_current_user_post_path(@post), :class => 'nav-link' %>
-                  </li>
-                  <li class="nav-item">
-                    <%= link_to 'Delete', current_user_post_path(@post), method: :delete, data: {confirm: "Are you sure?"}, :class => 'nav-link'  %>
-                  </li>
-                <% end %>
-              </ul>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">
-                <%= @post.title %>
-              </h5>
-              <p class="card-text">
-                <%= @post.description %>
-              </p>
-            </div>
-          </div>
-      </div>
-  </div>
+<div class="row mt-4">
+		<div class="col-12">
+				<div class="card text-center">
+					<div class="card-header">
+						<ul class="nav nav-pills card-header-pills">
+							<li class="nav-item">
+								<%= link_to 'Comments', post_comments_path(@post), class: "nav-link" %>
+							</li>
+							<% if @post.user.id == current_user.id %>  
+								<li class="nav-item">
+									<%= link_to 'Edit', edit_current_user_post_path(@post), :class => 'nav-link' %>
+								</li>
+								<li class="nav-item">
+									<%= link_to 'Delete', current_user_post_path(@post), method: :delete, data: {confirm: "Are you sure?"}, :class => 'nav-link'  %>
+								</li>
+							<% end %>
+						</ul>
+					</div>
+					<div class="card-body">
+						<h5 class="card-title">
+							<%= @post.title %>
+						</h5>
+						<p class="card-text">
+							<%= @post.description %>
+						</p>
+					</div>
+				</div>
+		</div>
 </div>

@@ -17,23 +17,14 @@
     </li>
   </ol>
 </nav>
-<div class="container-fluid">
-	<p id="notice"></p>
-  <div class="row mt-4">
-      <div class="col-12">
-          <div class="card text-center">
-              <div class="card-header">
-                Add a new comment
-              </div>
-							<div id="comment_form">
-              	<%= render 'create_form', post: @post %>              
-							</div>
-          </div>
-      </div>      
-  </div>
-  <div class="row mt-4">
-      <div class="col-12">
-		  	<%= render 'comments_table', comments: @comments, user: current_user %>
-      </div>
-  </div>
+<p id="notice"></p>
+<div class="row mt-4">
+	<div class="col-12" id="comment_form">
+		<%= render 'create_form', post: @post %>              
+	</div>      
+</div>
+<div class="row mt-4">
+  <div class="col-12" id="comment_form">
+		<%= render 'comments_table', comments: @comments, user: current_user %>
+	</div>
 </div>
