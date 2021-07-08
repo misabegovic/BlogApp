@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2021_06_13_213055) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["comment_id"], name: "index_reactions_on_comment_id"
+    t.index ["user_id", "comment_id", "reaction_type"], name: "index_reactions_on_user_id_and_comment_id_and_reaction_type", unique: true
     t.index ["user_id"], name: "index_reactions_on_user_id"
   end
 

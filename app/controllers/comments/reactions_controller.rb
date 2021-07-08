@@ -3,34 +3,33 @@
 module Comments
   class ReactionsController < ApplicationController
     def create
-      @reaction = Reaction.new(reaction_params)
-      @reaction.user = current_user
-      @reaction.comment = comment
-      @reaction.save
+      result = Reactions::CreateService.new(params[:comment_id], current_user.id, reaction_params).call
 
       respond_to do |format|
-        @reaction.save
-        format.html { redirect_to post_comments_path(comment.post) }
-      end
-    end
-
-    def update
-      respond_to do |format|
-        reaction.update(reaction_params)
-        format.html { redirect_to post_comments_path(comment.post) }
+        format.js do
+          render :create, locals: {
+            result: result,
+            current_user: current_user
+          }
+        end
       end
     end
 
     def destroy
-      reaction.destroy
-      redirect_to post_comments_path(comment.post)
+      result = Reactions::DeleteService.new(params[:id], current_user.id).call
+
+      respond_to do |format|
+        format.js do
+          render :destroy, locals: {
+            result: result,
+            comment: comment,
+            reaction_id: params[:id]
+          }
+        end
+      end
     end
 
     private
-
-    def reaction
-      @reaction ||= comment.reactions.find(params[:id])
-    end
 
     def comment
       @comment ||= Comment.find(params[:comment_id])

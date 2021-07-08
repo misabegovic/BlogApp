@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :comments, only: %i[index create edit update destroy], controller: 'posts/comments'
   end
   resources :comments, only: %i[] do
-    resources :reactions, only: %i[create update destroy], controller: 'comments/reactions'
+    resources :reactions, only: %i[create destroy], controller: 'comments/reactions'
   end
 
   root to: 'home#index'

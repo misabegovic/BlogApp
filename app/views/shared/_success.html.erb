@@ -1,7 +1,13 @@
 <% if action == :create %>
-  <p>Comment successfully created!</p>
+	<div class="alert alert-success" role="alert">
+		<p class="mb-0">Comment successfully created!</p>
+	</div>
 <% elsif action == :update %>
-  <p>Comment successfully updated!</p>
-	<% elsif action == :delete %>
-  <p>Comment successfully deleted!</p>
+  <div class="alert alert-success" role="alert">
+		<p class="mb-0">Comment successfully updated!</p>
+	</div>
+<% elsif action == :delete %>
+	<div class="alert alert-success" role="alert">
+		<p class="mb-0">Comment successfully deleted!</p>
+	</div>
 <% end %>
