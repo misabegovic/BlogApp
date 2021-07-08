@@ -1,7 +1,10 @@
 <% if result.success? %>
   document.getElementById('notice').innerHTML = "<%= j render 'shared/success', action: :delete %>";
-	document.getElementById('comment_form').innerHTML= "<%= j render 'create_form', post: post %>";	
   document.getElementById("comment_row_<%= comment_id %>").remove();
+	var editForm = document.getElementById("edit_comment_<%= comment_id %>");
+	if (editForm) {
+		document.getElementById('comment_form').innerHTML= "<%= j render 'create_form', post: post %>";	
+	}
 <% else %>
 	document.getElementById('notice').innerHTML = "<%= j render 'shared/fail', errors: result.errors %>";
 <% end %>

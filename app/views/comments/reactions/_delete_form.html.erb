@@ -1,0 +1,5 @@
+<%= form_with(model: [ comment, user_reaction(comment, type) ], method: :delete, local: true) do |form| %>    
+	<button type="submit" class="btn btn-primary">
+		<%= humanize_type(type) %> <span class="badge badge-light"><%= reactions_count comment, type %></span>
+	</button>
+<% end %>

@@ -1,0 +1,11 @@
+<ul class="list-group list-group-flush" id="comment_<%= comment.id %>_reactions_list">
+	<li class="list-group-item" id="<%= like_type %>_comment_<%= comment.id %>">
+		<%= render 'comments/reactions/reaction_list_item', comment: comment, type: like_type %>
+	</li>
+	<li class="list-group-item" id="<%= thumbs_up_type %>_comment_<%= comment.id %>">
+	  <%= render 'comments/reactions/reaction_list_item', comment: comment, type: thumbs_up_type %>
+	</li>
+	<li class="list-group-item" id="<%= smile_type %>_comment_<%= comment.id %>">
+	  <%= render 'comments/reactions/reaction_list_item', comment: comment, type: smile_type %>
+	</li>
+</ul>

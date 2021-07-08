@@ -23,15 +23,5 @@
 	<% end %>
 </td>
 <td>
-	<ul class="list-group list-group-flush">
-		<li class="list-group-item">
-			<%= render 'reaction_form', comment: comment, type: like_type %>
-		</li>
-		<li class="list-group-item">
-			<%= render 'reaction_form', comment: comment, type: thumbs_up_type %>
-		</li>
-		<li class="list-group-item">
-			<%= render 'reaction_form', comment: comment, type: smile_type %>
-		</li>
-	</ul>
+	<%= render 'comments/reactions/reaction_list', comment: comment %>
 </td>

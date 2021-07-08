@@ -1,0 +1,5 @@
+<% if user_reacted?(comment, type) %>
+	<%= render 'comments/reactions/delete_form', comment: comment, type: type %>
+<% else %>
+	<%= render 'comments/reactions/create_form', comment: comment, type: type %>
+<% end %>
