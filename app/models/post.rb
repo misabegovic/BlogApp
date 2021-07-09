@@ -11,8 +11,12 @@ class Post < ApplicationRecord
 
   private
 
-  def trigger_broadcast(data)
+  def trigger_post_broadcast(data)
     ActionCable.server.broadcast("post_#{id}", data)
+  end
+
+  def trigger_comments_broadcast(data)
+    ActionCable.server.broadcast("post_#{id}:comments", data)
   end
 
   def broadcast_update
@@ -22,7 +26,8 @@ class Post < ApplicationRecord
       title: title,
       description: description
     }
-    trigger_broadcast(data)
+    trigger_post_broadcast(data)
+    trigger_comments_broadcast(data) if saved_change_to_title?
   end
 
   def broadcast_destroy
@@ -30,6 +35,7 @@ class Post < ApplicationRecord
       action: :destroy,
       type: :post
     }
-    trigger_broadcast(data)
+    trigger_post_broadcast(data)
+    trigger_comments_broadcast(data)
   end
 end

@@ -46,6 +46,8 @@ class Comment < ApplicationRecord
   end
 
   def broadcast_destroy
+    return if post.frozen?
+
     data = {
       action: :destroy,
       type: :comment,

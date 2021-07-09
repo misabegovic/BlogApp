@@ -27,9 +27,49 @@ document.addEventListener('turbolinks:load', () => {
 					this.processCommentActions(data);
 				} else if(data["type"] == "reaction") {
 					this.processReactionActions(data);
-				} 
+				} else if(data["type"] == "post") {
+					this.processPostActions(data);
+				}
 			},
-			
+
+			processPostActions(data){
+				if(data["action"] == "update") {			
+					this.updatePostBreadcrumbTitle(data);
+				} else if(data["action"] == "destroy") {
+					this.removePostBreadcrumb();
+					this.removeCommentsSection();
+					this.appendDeletedNotice();
+				}
+			},
+
+			updatePostBreadcrumbTitle(data){
+				var element = document.getElementById("post-title-link");
+				if(element && data["title"]){
+					element.innerHTML = data["title"];
+				}
+			},
+
+			removePostBreadcrumb(){
+				var element = document.getElementById("post-title-item");
+				if(element){
+					element.innerHTML = "This Post has been removed";
+				}
+			},
+
+			appendDeletedNotice() {
+				var element = document.getElementById("notice");
+				if(element){
+					element.innerHTML = "This Post has been removed by the user.";
+				}
+			},
+
+			removeCommentsSection(){
+				var element = document.getElementById("comments-section");
+				if(element){
+					element.remove();
+				}
+			},
+
 			processReactionActions(data){
 				if(data["owner_id"] == user_id){
 					this.processReactionActionsForOwner(data);
@@ -77,7 +117,7 @@ document.addEventListener('turbolinks:load', () => {
 					this.appendComment(data);
 				} else if(data["action"] == "update") {
 					this.updateCommentDescription(data);
-				} else if(data["action"] == "destroy") {
+				} else if(data["action"] == "destroy") {					
 					this.removeComment(data);
 				}
 			},

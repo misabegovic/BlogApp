@@ -12,8 +12,8 @@
     <li class="breadcrumb-item">
       <%= link_to "Posts", user_posts_path(@post.user) %>
     </li>
-    <li class="breadcrumb-item">
-      <%= link_to @post.title, post_path(@post) %>
+    <li class="breadcrumb-item" id="post-title-item">
+      <%= link_to @post.title, post_path(@post), id: "post-title-link" %>
     </li>
     <li class="breadcrumb-item active" aria-current="page">
       Comments
@@ -21,13 +21,15 @@
   </ol>
 </nav>
 <p id="notice"></p>
-<div class="row mt-4">
-	<div class="col-12" id="comment_form">
-		<%= render 'create_form', post: @post %>              
-	</div>      
-</div>
-<div class="row mt-4">
-  <div class="col-12" id="comment_form">
-		<%= render 'comments_table', comments: @comments, user: current_user %>
+<div id="comments-section">
+	<div class="row mt-4">
+		<div class="col-12" id="comment_form">
+			<%= render 'create_form', post: @post %>              
+		</div>      
+	</div>
+	<div class="row mt-4">
+		<div class="col-12">
+			<%= render 'comments_table', comments: @comments, user: current_user %>
+		</div>
 	</div>
 </div>
