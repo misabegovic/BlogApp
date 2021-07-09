@@ -1,4 +1,4 @@
-<%= form_for([ comment, Reaction.new ], remote: true) do |form| %>    
+<%= form_for([ comment, Reaction.new ], remote: true, html: { id: type+"_create_form_comment_"+comment.id.to_s }) do |form| %>    
 	<%= form.hidden_field :reaction_type, :value => type, id: "comment_reaction_"+type+"_"+comment.id.to_s %>
 
 	<button type="submit" class="btn btn-secondary">

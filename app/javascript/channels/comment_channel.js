@@ -49,9 +49,14 @@ document.addEventListener('turbolinks:load', () => {
 			},
 
 			renderReaction(data){
-				console.log(data);
 				var element = document.getElementById(data["data"]["reaction_type"]+"_comment_"+data["data"]["comment_id"]);
-				if (element) {
+				var formElement;
+				if(data["data"]["action"] == "create") {
+					formElement = document.getElementById(data["data"]["reaction_type"]+"_create_form_comment_"+data["data"]["comment_id"]);
+				} else {
+					formElement = document.getElementById(data["data"]["reaction_type"]+"_delete_form_comment_"+data["data"]["reaction_id"]);
+				}
+				if (element && !formElement) {
 					element.innerHTML = data["html"];
 				}
 			},
