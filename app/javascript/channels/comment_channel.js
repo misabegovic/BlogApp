@@ -117,7 +117,7 @@ document.addEventListener('turbolinks:load', () => {
 					this.appendComment(data);
 				} else if(data["action"] == "update") {
 					this.updateCommentDescription(data);
-				} else if(data["action"] == "destroy") {					
+				} else if(data["action"] == "destroy") {		
 					this.removeComment(data);
 				}
 			},

@@ -46,7 +46,7 @@ class Comment < ApplicationRecord
   end
 
   def broadcast_destroy
-    return if post.frozen?
+    return unless destroyed_by_association.nil?
 
     data = {
       action: :destroy,
