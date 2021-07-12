@@ -9,6 +9,8 @@ class Reaction < ApplicationRecord
   after_commit :broadcast_create, on: :create
   after_commit :broadcast_destroy, on: :destroy
 
+  validates_uniqueness_of :reaction_type, scope: %i[user_id comment_id]
+
   private
 
   def trigger_broadcast(data)
