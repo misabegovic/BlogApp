@@ -13,23 +13,20 @@ RSpec.describe Comments::CreateService do
 
   describe '#call' do
     context 'comment with description' do
-      it 'will be created' do
-        response = described_class.new(post.id, user.id, params).call
-        expect(response).to be_success
+      it_behaves_like 'successful service' do
+        let(:call_result) { described_class.new(post.id, user.id, params).call }
       end
     end
 
     context 'comment without description' do
-      it 'will not be created' do
-        response = described_class.new(post.id, user.id, {}).call
-        expect(response).to be_failure
+      it_behaves_like 'failed service', ["Description can't be blank"] do
+        let(:call_result) { described_class.new(post.id, user.id, {}).call }
       end
     end
 
     context 'comment with empty description' do
-      it 'will not be created' do
-        response = described_class.new(post.id, user.id, { description: '' }).call
-        expect(response).to be_failure
+      it_behaves_like 'failed service', ["Description can't be blank"] do
+        let(:call_result) { described_class.new(post.id, user.id, { description: '' }).call }
       end
     end
   end

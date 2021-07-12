@@ -12,7 +12,7 @@ module Comments
       execute(rescue_list: [ActiveRecord::RecordInvalid]) do
         comment = find_comment
         validate_owner!(comment)
-        update_comment(comment)
+        update_comment!(comment)
 
         add_result(comment)
       end
@@ -35,9 +35,10 @@ module Comments
     def ownership_error
       comment = Comment.new
       comment.errors.add(:Unauthorized, ', you are not the owner of this comment')
+      comment.errors
     end
 
-    def update_comment(comment)
+    def update_comment!(comment)
       save_and_raise!(ActiveRecord::RecordInvalid, comment.errors) unless comment.update(@params)
 
       comment

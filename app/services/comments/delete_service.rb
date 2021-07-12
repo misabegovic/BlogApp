@@ -34,6 +34,7 @@ module Comments
     def ownership_error
       comment = Comment.new
       comment.errors.add(:Unauthorized, ', you are not the owner of this comment')
+      comment.errors
     end
 
     def delete_comment!(comment)

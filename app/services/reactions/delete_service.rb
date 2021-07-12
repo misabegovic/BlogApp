@@ -42,6 +42,7 @@ module Reactions
     def ownership_error
       reaction = Reaction.new
       reaction.errors.add(:Unauthorized, ', you are not the owner of this reaction')
+      reaction.errors
     end
 
     def delete_reaction!(reaction)
