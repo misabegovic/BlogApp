@@ -3,6 +3,10 @@
 - You must have redis installed and running on the default port:6379 (or configure it in config/redis/cable.yml).
 - You must have mysql installed and running.
 
+# Installing MySQL
+
+- Useful link: https://ostechnix.com/how-to-use-mysql-with-ruby-on-rails-application/
+
 # Installing Redis On Linux
 - wget http://download.redis.io/redis-stable.tar.gz
 - tar xvzf redis-stable.tar.gz
@@ -11,7 +15,7 @@
 - make install
 
 # Installing Redis On Mac
-brew install redis
+- brew install redis
 
 # Steps to run:
 - make sure you have mysql setup properly
