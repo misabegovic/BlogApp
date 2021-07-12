@@ -10,11 +10,29 @@ RSpec.describe Comments::CreateService do
   end
   let(:user) { create(:user) }
   let(:post) { create(:post) }
+  let(:expected_data) do
+    {
+      'action' => :create.to_s,
+      'comment_id' => Comment.last.id,
+      'type' => :comment.to_s
+    }
+  end
+  let(:trigger_successfull_request) { described_class.new(post.id, user.id, params).call }
 
   describe '#call' do
     context 'comment with description' do
       it_behaves_like 'successful service' do
-        let(:call_result) { described_class.new(post.id, user.id, params).call }
+        let(:call_result) { trigger_successfull_request }
+      end
+
+      it 'broadcasts comment created event' do
+        expect { trigger_successfull_request }.to(have_broadcasted_to("post_#{post.id}:comments").exactly(:once))
+      end
+
+      it 'validates broadcasted comment created event' do
+        expect { trigger_successfull_request }.to(have_broadcasted_to("post_#{post.id}:comments").with do |data|
+                                                    expect(data).to eq expected_data
+                                                  end)
       end
     end
 
